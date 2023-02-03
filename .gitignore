@@ -361,4 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-Worldyachts\Worldyachts\bin\Debug
+/Worldyachts/AuthWindow.xaml
