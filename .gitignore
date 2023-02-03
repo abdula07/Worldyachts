@@ -362,7 +362,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-/Worldyachts/bin 
-/Worldyachts/obj
-/Worldyachts/Worldyachts
-/.vs/
+*.Worldyachts/bin 
+*.Worldyachts/obj
+*.Worldyachts/Worldyachts
+*.vs/
