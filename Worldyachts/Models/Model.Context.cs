@@ -24,6 +24,12 @@ namespace Worldyachts.Models
         {
             throw new UnintentionalCodeFirstException();
         }
+
+        public user14Entities GetContext()
+        {
+            return this.Db;
+        }
+        public user14Entities Db = new user14Entities(); 
     
         public virtual DbSet<Color> Color { get; set; }
         public virtual DbSet<Material> Material { get; set; }

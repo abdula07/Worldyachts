@@ -22,6 +22,7 @@ namespace Worldyachts
     {
         public AuthWindow()
         {
+            Models.user14Entities
             InitializeComponent();
         }
     }
