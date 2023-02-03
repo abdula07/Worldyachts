@@ -142,6 +142,14 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Worldyachts.Models.Color.datasource" />
+    <None Include="Properties\DataSources\Worldyachts.Models.Material.datasource" />
+    <None Include="Properties\DataSources\Worldyachts.Models.Order.datasource" />
+    <None Include="Properties\DataSources\Worldyachts.Models.OrderLog.datasource" />
+    <None Include="Properties\DataSources\Worldyachts.Models.Product.datasource" />
+    <None Include="Properties\DataSources\Worldyachts.Models.Role.datasource" />
+    <None Include="Properties\DataSources\Worldyachts.Models.Type.datasource" />
+    <None Include="Properties\DataSources\Worldyachts.Models.User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
