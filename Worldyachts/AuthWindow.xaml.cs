@@ -29,5 +29,10 @@ namespace Worldyachts
         {
             new Windows.MainWindow().Show();
         }
+
+        private void GuestLogin(object sender, RoutedEventArgs e)
+        {
+            new Windows.MainWindow().Show();
+        }
     }
 }
