@@ -24,5 +24,10 @@ namespace Worldyachts
         {
             InitializeComponent();
         }
+
+        private void Login(object sender, RoutedEventArgs e)
+        {
+            new Windows.MainWindow().Show();
+        }
     }
 }
