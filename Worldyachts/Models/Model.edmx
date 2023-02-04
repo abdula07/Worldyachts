@@ -10,16 +10,16 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="money" />
         </EntityType>
         <EntityType Name="Material">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="money" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -28,57 +28,47 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="OrderDate" Type="date" Nullable="false" />
-        </EntityType>
-        <EntityType Name="OrderLog">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaterialId" Type="int" Nullable="false" />
-          <Property Name="ColorId" Type="int" Nullable="false" />
-          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="ProductInfo" Type="nchar" MaxLength="100" Nullable="false" />
           <Property Name="Price" Type="money" Nullable="false" />
-          <Property Name="OrderId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ColorId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="TypeId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ModelBoat" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="NumberOfSeatsForRow" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Mast" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="NumberOfSeats" Type="int" />
           <Property Name="MaterialId" Type="int" Nullable="false" />
+          <Property Name="ColorId" Type="int" Nullable="false" />
+          <Property Name="Mast" Type="bit" Nullable="false" />
+          <Property Name="BasePrice" Type="money" Nullable="false" />
+          <Property Name="Photo" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Price" Type="money" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pass" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Pass" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Order_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
@@ -104,55 +94,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderLog_Color">
-          <End Role="Color" Type="Self.Color" Multiplicity="1" />
-          <End Role="OrderLog" Type="Self.OrderLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Color">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderLog">
-              <PropertyRef Name="ColorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderLog_Material">
-          <End Role="Material" Type="Self.Material" Multiplicity="1" />
-          <End Role="OrderLog" Type="Self.OrderLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Material">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderLog">
-              <PropertyRef Name="MaterialId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderLog_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderLog" Type="Self.OrderLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderLog">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderLog_Type">
-          <End Role="Type" Type="Self.Type" Multiplicity="1" />
-          <End Role="OrderLog" Type="Self.OrderLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderLog">
-              <PropertyRef Name="TypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Color">
+        <Association Name="FK_Product_Color1">
           <End Role="Color" Type="Self.Color" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -164,7 +106,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Material">
+        <Association Name="FK_Product_Material1">
           <End Role="Material" Type="Self.Material" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -204,7 +146,6 @@
           <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderLog" EntityType="Self.OrderLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
@@ -217,27 +158,11 @@
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderLog_Color" Association="Self.FK_OrderLog_Color">
-            <End Role="Color" EntitySet="Color" />
-            <End Role="OrderLog" EntitySet="OrderLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderLog_Material" Association="Self.FK_OrderLog_Material">
-            <End Role="Material" EntitySet="Material" />
-            <End Role="OrderLog" EntitySet="OrderLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderLog_Order" Association="Self.FK_OrderLog_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderLog" EntitySet="OrderLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderLog_Type" Association="Self.FK_OrderLog_Type">
-            <End Role="Type" EntitySet="Type" />
-            <End Role="OrderLog" EntitySet="OrderLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Color" Association="Self.FK_Product_Color">
+          <AssociationSet Name="FK_Product_Color1" Association="Self.FK_Product_Color1">
             <End Role="Color" EntitySet="Color" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Material" Association="Self.FK_Product_Material">
+          <AssociationSet Name="FK_Product_Material1" Association="Self.FK_Product_Material1">
             <End Role="Material" EntitySet="Material" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
@@ -260,20 +185,18 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="OrderLog" Relationship="Self.FK_OrderLog_Color" FromRole="Color" ToRole="OrderLog" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Color" FromRole="Color" ToRole="Product" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Color1" FromRole="Color" ToRole="Product" />
         </EntityType>
         <EntityType Name="Material">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="OrderLog" Relationship="Self.FK_OrderLog_Material" FromRole="Material" ToRole="OrderLog" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Material" FromRole="Material" ToRole="Product" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Material1" FromRole="Material" ToRole="Product" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -282,41 +205,26 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ProductInfo" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Order_Product" FromRole="Order" ToRole="Product" />
           <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
-          <NavigationProperty Name="OrderLog" Relationship="Self.FK_OrderLog_Order" FromRole="Order" ToRole="OrderLog" />
-        </EntityType>
-        <EntityType Name="OrderLog">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaterialId" Type="Int32" Nullable="false" />
-          <Property Name="ColorId" Type="Int32" Nullable="false" />
-          <Property Name="TypeId" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Color" Relationship="Self.FK_OrderLog_Color" FromRole="OrderLog" ToRole="Color" />
-          <NavigationProperty Name="Material" Relationship="Self.FK_OrderLog_Material" FromRole="OrderLog" ToRole="Material" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_OrderLog_Order" FromRole="OrderLog" ToRole="Order" />
-          <NavigationProperty Name="Type" Relationship="Self.FK_OrderLog_Type" FromRole="OrderLog" ToRole="Type" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ColorId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="TypeId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ModelBoat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NumberOfSeatsForRow" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Mast" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="NumberOfSeats" Type="Int32" />
           <Property Name="MaterialId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Color" Relationship="Self.FK_Product_Color" FromRole="Product" ToRole="Color" />
-          <NavigationProperty Name="Material" Relationship="Self.FK_Product_Material" FromRole="Product" ToRole="Material" />
+          <Property Name="ColorId" Type="Int32" Nullable="false" />
+          <Property Name="Mast" Type="Boolean" Nullable="false" />
+          <Property Name="BasePrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Color" Relationship="Self.FK_Product_Color1" FromRole="Product" ToRole="Color" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_Product_Material1" FromRole="Product" ToRole="Material" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Product" FromRole="Product" ToRole="Order" />
           <NavigationProperty Name="Type" Relationship="Self.FK_Product_Type" FromRole="Product" ToRole="Type" />
         </EntityType>
@@ -325,7 +233,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="Type">
@@ -333,9 +241,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="OrderLog" Relationship="Self.FK_OrderLog_Type" FromRole="Type" ToRole="OrderLog" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Type" FromRole="Type" ToRole="Product" />
         </EntityType>
         <EntityType Name="User">
@@ -343,26 +250,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
-        <Association Name="FK_OrderLog_Color">
-          <End Role="Color" Type="Self.Color" Multiplicity="1" />
-          <End Role="OrderLog" Type="Self.OrderLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Color">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderLog">
-              <PropertyRef Name="ColorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Color">
+        <Association Name="FK_Product_Color1">
           <End Role="Color" Type="Self.Color" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -374,19 +269,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderLog_Material">
-          <End Role="Material" Type="Self.Material" Multiplicity="1" />
-          <End Role="OrderLog" Type="Self.OrderLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Material">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderLog">
-              <PropertyRef Name="MaterialId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Material">
+        <Association Name="FK_Product_Material1">
           <End Role="Material" Type="Self.Material" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -422,30 +305,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderLog_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderLog" Type="Self.OrderLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderLog">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderLog_Type">
-          <End Role="Type" Type="Self.Type" Multiplicity="1" />
-          <End Role="OrderLog" Type="Self.OrderLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderLog">
-              <PropertyRef Name="TypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_Type">
           <End Role="Type" Type="Self.Type" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -470,28 +329,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="user14Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="user14Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Color" EntityType="Self.Color" />
           <EntitySet Name="Material" EntityType="Self.Material" />
           <EntitySet Name="Order" EntityType="Self.Order" />
-          <EntitySet Name="OrderLog" EntityType="Self.OrderLog" />
           <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="Type" EntityType="Self.Type" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_OrderLog_Color" Association="Self.FK_OrderLog_Color">
-            <End Role="Color" EntitySet="Color" />
-            <End Role="OrderLog" EntitySet="OrderLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Color" Association="Self.FK_Product_Color">
+          <AssociationSet Name="FK_Product_Color1" Association="Self.FK_Product_Color1">
             <End Role="Color" EntitySet="Color" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderLog_Material" Association="Self.FK_OrderLog_Material">
-            <End Role="Material" EntitySet="Material" />
-            <End Role="OrderLog" EntitySet="OrderLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Material" Association="Self.FK_Product_Material">
+          <AssociationSet Name="FK_Product_Material1" Association="Self.FK_Product_Material1">
             <End Role="Material" EntitySet="Material" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
@@ -502,14 +352,6 @@
           <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderLog_Order" Association="Self.FK_OrderLog_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderLog" EntitySet="OrderLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderLog_Type" Association="Self.FK_OrderLog_Type">
-            <End Role="Type" EntitySet="Type" />
-            <End Role="OrderLog" EntitySet="OrderLog" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Type" Association="Self.FK_Product_Type">
             <End Role="Type" EntitySet="Type" />
@@ -525,7 +367,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище user14ModelContainer" CdmEntityContainer="user14Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище user14ModelContainer" CdmEntityContainer="user14Entities1">
           <EntitySetMapping Name="Color">
             <EntityTypeMapping TypeName="user14Model.Color">
               <MappingFragment StoreEntitySet="Color">
@@ -550,19 +392,8 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderLog">
-            <EntityTypeMapping TypeName="user14Model.OrderLog">
-              <MappingFragment StoreEntitySet="OrderLog">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
-                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="ProductInfo" ColumnName="ProductInfo" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -570,14 +401,14 @@
             <EntityTypeMapping TypeName="user14Model.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ModelBoat" ColumnName="ModelBoat" />
-                <ScalarProperty Name="NumberOfSeatsForRow" ColumnName="NumberOfSeatsForRow" />
-                <ScalarProperty Name="Mast" ColumnName="Mast" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="NumberOfSeats" ColumnName="NumberOfSeats" />
                 <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+                <ScalarProperty Name="Mast" ColumnName="Mast" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -602,10 +433,10 @@
             <EntityTypeMapping TypeName="user14Model.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -21,14 +21,14 @@ namespace Worldyachts.Models
         }
     
         public int Id { get; set; }
-        public int ColorId { get; set; }
-        public int TypeId { get; set; }
         public string Name { get; set; }
-        public string ModelBoat { get; set; }
-        public string NumberOfSeatsForRow { get; set; }
-        public string Mast { get; set; }
-        public decimal Price { get; set; }
+        public int TypeId { get; set; }
+        public Nullable<int> NumberOfSeats { get; set; }
         public int MaterialId { get; set; }
+        public int ColorId { get; set; }
+        public bool Mast { get; set; }
+        public decimal BasePrice { get; set; }
+        public string Photo { get; set; }
     
         public virtual Color Color { get; set; }
         public virtual Material Material { get; set; }

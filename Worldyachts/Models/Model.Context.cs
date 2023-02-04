@@ -13,10 +13,10 @@ namespace Worldyachts.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class user14Entities : DbContext
+    public partial class user14Entities1 : DbContext
     {
-        public user14Entities()
-            : base("name=user14Entities")
+        public user14Entities1()
+            : base("name=user14Entities1")
         {
         }
     
@@ -24,17 +24,10 @@ namespace Worldyachts.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-
-        public user14Entities GetContext()
-        {
-            return this.Db;
-        }
-        public user14Entities Db = new user14Entities(); 
     
         public virtual DbSet<Color> Color { get; set; }
         public virtual DbSet<Material> Material { get; set; }
         public virtual DbSet<Order> Order { get; set; }
-        public virtual DbSet<OrderLog> OrderLog { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Type> Type { get; set; }
