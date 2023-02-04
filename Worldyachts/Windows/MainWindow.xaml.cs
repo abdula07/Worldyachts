@@ -28,5 +28,10 @@ namespace Worldyachts.Windows
         {
 
         }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+           
+        }
     }
 }

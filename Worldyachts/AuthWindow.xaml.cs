@@ -27,11 +27,16 @@ namespace Worldyachts
 
         private void Login(object sender, RoutedEventArgs e)
         {
+            var LoginText = LoginBox.Text;
+            var PasswordText = Password.Password.Trim();
+            App.getDb().User.Find(user => user.Login == LoginText);
+
             new Windows.MainWindow().Show();
         }
 
         private void GuestLogin(object sender, RoutedEventArgs e)
         {
+            
             new Windows.MainWindow().Show();
         }
     }

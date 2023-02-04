@@ -19,9 +19,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Content="Логин" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Height="25"/>
-        <TextBox Grid.Column="2" Height="25" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox Grid.Column="2" x:Name="LoginBox" Height="25" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Label Content="Пароль" Grid.Column="1" Grid.Row="1" Height="25" VerticalAlignment="Top" Margin="0,30,0,0"/>
-        <PasswordBox Grid.Column="2" Margin="0,30,0,0" Height="25" Grid.Row="1"  VerticalAlignment="Top"/>
+        <PasswordBox x:Name="Password" Grid.Column="2" Margin="0,30,0,0" Height="25" Grid.Row="1"  VerticalAlignment="Top"/>
         <Button Click="Login" Content="Вход" Grid.Column="2" Margin="0,60,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Button Content="Войти как гость" Grid.Column="2" Margin="1,85,89,0" Grid.Row="1" VerticalAlignment="Top" Click="GuestLogin" Grid.ColumnSpan="2"/>
     </Grid>

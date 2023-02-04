@@ -13,5 +13,16 @@ namespace Worldyachts
     /// </summary>
     public partial class App : Application
     {
+        private static Models.user14Entities1 Db;
+
+
+        public static Models.user14Entities1 getDb()
+        {
+            if (Db == null)
+                Db = new Models.user14Entities1();
+            return Db;
+        }
     }
+    
+       
 }

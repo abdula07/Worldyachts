@@ -24,7 +24,9 @@ namespace Worldyachts.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+     
+
         public virtual DbSet<Color> Color { get; set; }
         public virtual DbSet<Material> Material { get; set; }
         public virtual DbSet<Order> Order { get; set; }
